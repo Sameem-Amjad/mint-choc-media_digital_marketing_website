@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"root=%{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"app=%{http_code}\\\\n\" http://localhost:5173/src/app/App.tsx)",
+      "Bash(curl -s -o /dev/null -w \"work=%{http_code}\\\\n\" http://localhost:5173/src/app/components/Work.tsx)"
+    ]
+  }
+}

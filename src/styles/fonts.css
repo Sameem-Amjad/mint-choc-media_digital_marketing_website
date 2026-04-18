@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Aileron:wght@400;500;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/dunbar');
+
+:root {
+  --font-dunbar: 'Dunbar', sans-serif;
+  --font-aileron: 'Aileron', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-aileron);
+  background-color: #183019;
+}
+
+::selection {
+  background-color: #04FF00;
+  color: #183019;
+}
