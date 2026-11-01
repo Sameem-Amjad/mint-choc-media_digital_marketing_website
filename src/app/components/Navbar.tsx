@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import logoWhite from '../../assets/logo/horizontal-white.svg';
 import markPrimary from '../../assets/logo/mark-primary.svg';
@@ -13,6 +13,21 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  // Closing the menu cancels the browser's smooth scroll to the link's section,
+  // so menu links scroll themselves once the menu has finished closing.
+  const pendingHref = useRef<string | null>(null);
+  const goFromMenu = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    pendingHref.current = e.currentTarget.getAttribute('href');
+    setOpen(false);
+  };
+  const scrollToPending = () => {
+    const href = pendingHref.current;
+    pendingHref.current = null;
+    if (!href) return;
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    history.replaceState(null, '', href);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -109,7 +124,7 @@ export function Navbar() {
           </button>
         </nav>
 
-        <AnimatePresence>
+        <AnimatePresence onExitComplete={scrollToPending}>
           {open && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
@@ -123,7 +138,7 @@ export function Navbar() {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      onClick={() => setOpen(false)}
+                      onClick={goFromMenu}
                       className="block uppercase tracking-wider text-base"
                       style={{
                         fontFamily: 'Aileron, sans-serif',
@@ -138,7 +153,7 @@ export function Navbar() {
                 <li>
                   <a
                     href="#contact"
-                    onClick={() => setOpen(false)}
+                    onClick={goFromMenu}
                     className="block text-center mt-4 px-6 py-3 rounded-full uppercase tracking-wider text-sm"
                     style={{
                       backgroundColor: '#04FF00',
