@@ -356,7 +356,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.8, duration: 0.8 }}
-          className="absolute -bottom-2 left-1/2 transform -translate-x-1/2"
+          className="absolute -bottom-14 left-1/2 transform -translate-x-1/2 hidden lg:block"
         >
           <div
             className="w-6 h-10 border-2 rounded-full flex justify-center pt-2"

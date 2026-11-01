@@ -1,18 +1,20 @@
 import { motion } from 'motion/react';
-import { Github, Instagram, Linkedin, MapPin, Twitter } from 'lucide-react';
+import { Instagram, Linkedin, MapPin, Twitter, Youtube } from 'lucide-react';
 import logoWhite from '../../assets/logo/horizontal-white.svg';
 
-const footerLinks = {
-  services: ['Social Media Marketing', 'Content Creation', 'Video Production', 'Digital Ads Strategy'],
-  company: ['About Us', 'Case Studies', 'Careers', 'Contact'],
-  resources: ['Blog', 'Showreel', 'Press', 'Privacy Policy'],
+// [label, section]. Pages that don't exist yet (blog, careers…) stay plain text.
+const footerLinks: Record<'services' | 'company' | 'resources', [string, string?][]> = {
+  services: [['Social Media Marketing', '#services'], ['Content Creation', '#services'], ['Video Production', '#services'], ['Digital Ads Strategy', '#services']],
+  company: [['About Us', '#founder'], ['Case Studies', '#work'], ['Careers'], ['Contact', '#contact']],
+  resources: [['Blog'], ['Showreel', '#work'], ['Press'], ['Privacy Policy']],
 };
 
-const socials = [
+// Profile URLs go here once the accounts exist; until then the icons are not links.
+const socials: { Icon: typeof Linkedin; label: string; href?: string }[] = [
   { Icon: Linkedin, label: 'LinkedIn' },
-  { Icon: Twitter, label: 'Twitter' },
   { Icon: Instagram, label: 'Instagram' },
-  { Icon: Github, label: 'GitHub' },
+  { Icon: Youtube, label: 'YouTube' },
+  { Icon: Twitter, label: 'X' },
 ];
 
 const container = {
@@ -109,15 +111,19 @@ export function Footer() {
             </a>
 
             <div className="flex gap-3 mt-6">
-              {socials.map(({ Icon, label }) => (
+              {socials.map(({ Icon, label, href }) => (
                 <motion.a
                   key={label}
-                  href="#"
+                  href={href}
+                  target={href ? '_blank' : undefined}
+                  rel={href ? 'noreferrer' : undefined}
+                  role={href ? undefined : 'img'}
                   aria-label={label}
+                  title={label}
                   whileHover={{ y: -4, backgroundColor: '#04FF00' }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                  className="group w-10 h-10 rounded-xl flex items-center justify-center border"
+                  className={`group w-10 h-10 rounded-xl flex items-center justify-center border ${href ? '' : 'pointer-events-none'}`}
                   style={{ borderColor: '#04FF00' }}
                 >
                   <Icon
@@ -144,11 +150,11 @@ export function Footer() {
                 {group}
               </h4>
               <ul className="space-y-2">
-                {footerLinks[group].map((link) => (
+                {footerLinks[group].map(([link, href]) => (
                   <li key={link}>
                     <a
-                      href="#"
-                      className="inline-block relative group"
+                      href={href}
+                      className={`inline-block relative group ${href ? '' : 'pointer-events-none'}`}
                       style={{
                         fontFamily: 'Aileron, sans-serif',
                         fontWeight: 400,

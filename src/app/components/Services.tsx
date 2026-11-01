@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, Camera, Film, Megaphone, Target } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import markWhite from '../../assets/logo/mark-white.svg';
 
 const services = [
   {
@@ -113,7 +114,7 @@ export function Services() {
               fontFamily: 'Aileron, sans-serif',
               fontWeight: 500,
               fontSize: '1.2rem',
-              color: '#EDFAF1',
+              color: '#183019',
               maxWidth: '44rem',
               margin: '0 auto',
               opacity: 0.9,
@@ -254,7 +255,7 @@ export function Services() {
           })}
         </motion.div>
 
-        <div className="grid md:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
+        <div id="founder" className="grid md:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center scroll-mt-24">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -360,12 +361,16 @@ export function Services() {
                 viewport={{ once: true }}
                 transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                <ImageWithFallback
-                  src="https://media.licdn.com/dms/image/v2/D4D03AQGDq9txFSRCbQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1722041112477?e=2147483647&v=beta&t=16YS5dRzmAUvIlFj_ZSMMInH9L9pdJQqdAG5siHPXIY"
-                  alt="Robert Steveson, Founder & CEO of Mint Choc Media"
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
+                {/* The LinkedIn photo this used now 404s; the brand mark stands in rather than a stranger's face. */}
+                <div
+                  className="w-full h-full flex items-center justify-center"
+                  style={{
+                    background:
+                      'radial-gradient(circle at 50% 38%, rgba(4,255,0,0.28), transparent 62%), linear-gradient(160deg, #24452a 0%, #183019 70%)',
+                  }}
+                >
+                  <img src={markWhite} alt="Mint Choc Media brand mark" className="w-1/2 -mt-16 drop-shadow-2xl" />
+                </div>
               </motion.div>
               <div
                 className="pointer-events-none absolute inset-0"

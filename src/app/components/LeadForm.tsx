@@ -34,10 +34,12 @@ const item = {
 export function LeadForm() {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sentOnce, setSentOnce] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+    setSentOnce(true);
     setTimeout(() => {
       setSubmitted(false);
       setFormData({ name: '', email: '', company: '', message: '' });
@@ -244,6 +246,15 @@ export function LeadForm() {
               )}
             </AnimatePresence>
           </motion.button>
+          {sentOnce && (
+            <p
+              role="status"
+              className="text-center text-sm"
+              style={{ color: '#183019', opacity: 0.7, fontFamily: 'Aileron, sans-serif' }}
+            >
+              This is a demo site, so the brief wasn&apos;t sent anywhere.
+            </p>
+          )}
         </motion.form>
       </div>
     </section>

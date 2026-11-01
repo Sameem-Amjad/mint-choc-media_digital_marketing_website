@@ -1,5 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Aileron:wght@400;500;700&display=swap');
-@import url('https://fonts.cdnfonts.com/css/dunbar');
+/* Brand typefaces, self-hosted from the brand pack (Logo/Typefaces). */
+@font-face { font-family: 'Aileron'; src: url('../assets/fonts/Aileron-Regular.otf') format('opentype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Aileron'; src: url('../assets/fonts/Aileron-SemiBold.otf') format('opentype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Aileron'; src: url('../assets/fonts/Aileron-Bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Aileron'; src: url('../assets/fonts/Aileron-Black.otf') format('opentype'); font-weight: 900; font-display: swap; }
+/* Only the ExtraBold cut exists, so it serves every weight rather than being faux-bolded. */
+@font-face { font-family: 'Dunbar'; src: url('../assets/fonts/dunbar-text-extra-bold.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
 
 :root {
   --font-dunbar: 'Dunbar', sans-serif;
